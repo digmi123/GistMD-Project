@@ -3,14 +3,18 @@ import React from 'react'
 
 function PatientQuestion(props) {
 
+  // const handleInputChange = ()=>{
+  //   props.inputChange();
+  // }
+
   switch(props.question.type) {
   case "text":
   case "number":
-    return <input type = {props.question.type} key= {props.question.id} placeholder={props.question.text}/>
+    return <input type = {props.question.type} name={props.question.id} onChange={props.inputChange} key= {props.question.id} placeholder={props.question.text}/>
 
   case "select":
     return (
-          <select defaultValue={props.question.options[0]}>
+          <select name={props.question.id} defaultValue={props.question.options[0]}>
             {props.question.options.map((option,i) => (
               <option key={i}>{option}</option>
             ))}

@@ -2,28 +2,28 @@ const questionData =
 [
     {
         type: "text",
-        id: "PatientName",
+        id: "name",
         text: "Patient name"
     },
     {
         type: "select",
-        id: "PatientGender",
+        id: "gender",
         text: "Patient gender",
         options: ["Male", "Female"]
     },
     {
         type: "number",
-        id: "PatientAge",
+        id: "age",
         text: "Patient age"
     },
     {
         type: "text",
-        id: "PatientLanguage",
+        id: "language",
         text: "Patient language"
     },
     {
         type: "text",
-        id: "ProcedureName",
+        id: "procedure",
         text: "Procedure name"
     }
 ]

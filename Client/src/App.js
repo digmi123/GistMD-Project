@@ -11,11 +11,11 @@ function App() {
     <BrowserRouter>
     <div className="App">
       <Header/>
-      <ToastContainer/>
-      
+      <ToastContainer position="top-center"/>
         <Routes>
-        <Route exact path="/" component={HomePage}/>
-        <Route path="/add" component={AddPatient}/>
+        <Route exact path="/" element={<HomePage/>}/>
+        <Route path="/add" element={<AddPatient/>}/>
+        <Route path="/update" element={<AddPatient/>}/>
         </Routes>
      
     </div>

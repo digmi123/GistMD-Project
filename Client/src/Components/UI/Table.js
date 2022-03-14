@@ -1,33 +1,76 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import questionData from '../../questionData'
-import data from '../../data'
+import './Table.css'
+import axios from 'axios';
+import { toast } from 'react-toastify'
+import { Link } from 'react-router-dom';
 
 
 function Table() {
 
-    const [tableData, setData] = useState(data)
-    console.log(tableData)
+    const [patientsData, setPatientsData] = useState([])
+
+    useEffect(()=>{
+        getPatients()
+    }, [])
+
+    const getPatients = async ()=>{
+        const response = await axios.get("http://localhost:5000/patients/getPatients");
+        if(response.status === 200){
+            setPatientsData(response.data)
+        }
+        else{
+            response.send("Unable to get patients data");
+        }
+    }
+
+    const deletePatientById = async (patientId)=>{
+        console.log(patientId);
+        const response = await axios.delete(`http://localhost:5000/patients/deletePatient/${patientId}`)
+        if(response.status === 200){
+            toast.success(response.data)
+            const updatedPatients = patientsData.filter((patient)=>{
+                return patient.id !== patientId
+            })
+            setPatientsData(updatedPatients)
+        }
+        else{
+            response.send("Unable to get patients data");
+        }
+    }
+
+    console.log("hi")
+    console.log(patientsData)
 
   return (
-    <div>
-        <table>
+    <div style={{marginTop: "80px"}}>
+        <table className='styled-table'>
             <thead>
             <tr>
+                <th style={{textAlign: "center"}}>No.</th>
                 {questionData.map((question,i)=>{
-                    return(<th key={i}>{question.text}</th>)
+                    return(<th style={{textAlign: "center"}} key={i}>{question.text}</th>)
                 })}
+                <th>Actions</th>
             </tr>
             </thead>
         
             <tbody>
-                    {tableData && tableData.map((record,i)=>{
+                    {patientsData && patientsData.map((record, index)=>{
                         return (
-                            <tr key={i}>
+                            <tr key={index}>
+                            <th scope="row">{ index+1 }</th>
                             <td>{record.name}</td>
                             <td>{record.gender}</td>
                             <td>{record.age}</td>
                             <td>{record.language}</td>
                             <td>{record.procedure}</td>
+                            <td style={{display:"flex"}}>
+                                <Link to={`/update/${record.id}`}>
+                                    <button className='btn btn-edit'>Edit</button>
+                                </Link>
+                                <button className='btn btn-delete' onClick={()=> deletePatientById(record.id)}>Delete</button>
+                            </td>
                             </tr>
                         )
                     })}
