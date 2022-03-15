@@ -1,4 +1,4 @@
-import AddPatient from "./Pages/AddPatient";
+import AddOrEditPatient from "./Pages/AddOrEditPatient";
 import HomePage from "./Pages/HomePage";
 import {BrowserRouter} from "react-router-dom";
 import { Route, Routes} from "react-router";
@@ -14,8 +14,8 @@ function App() {
       <ToastContainer position="top-center"/>
         <Routes>
         <Route exact path="/" element={<HomePage/>}/>
-        <Route path="/add" element={<AddPatient/>}/>
-        <Route path="/update" element={<AddPatient/>}/>
+        <Route path="/add" element={<AddOrEditPatient/>}/>
+        <Route path="/update/:id" element={<AddOrEditPatient/>}/>
         </Routes>
      
     </div>

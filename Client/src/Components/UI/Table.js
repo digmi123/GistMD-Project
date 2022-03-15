@@ -30,7 +30,7 @@ function Table() {
         if(response.status === 200){
             toast.success(response.data)
             const updatedPatients = patientsData.filter((patient)=>{
-                return patient.id !== patientId
+                return patient._id !== patientId
             })
             setPatientsData(updatedPatients)
         }
@@ -38,9 +38,6 @@ function Table() {
             response.send("Unable to get patients data");
         }
     }
-
-    console.log("hi")
-    console.log(patientsData)
 
   return (
     <div style={{marginTop: "80px"}}>
@@ -66,10 +63,10 @@ function Table() {
                             <td>{record.language}</td>
                             <td>{record.procedure}</td>
                             <td style={{display:"flex"}}>
-                                <Link to={`/update/${record.id}`}>
+                                <Link to={`/update/${record._id}`}>
                                     <button className='btn btn-edit'>Edit</button>
                                 </Link>
-                                <button className='btn btn-delete' onClick={()=> deletePatientById(record.id)}>Delete</button>
+                                <button className='btn btn-delete' onClick={()=> deletePatientById(record._id)}>Delete</button>
                             </td>
                             </tr>
                         )
