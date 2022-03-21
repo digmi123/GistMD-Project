@@ -3,14 +3,15 @@ const { default: mongoose } = require('mongoose');
 const cors = require('cors')
 const express = require('express')
 const app = express()
-// require('./db')
 const patientRoutes = require('./routes/patients')
+const questionRoutes = require('./routes/question')
 
 
 app.use(cors())
 app.use(express.json())
 
 app.use("/patients", patientRoutes)
+app.use("/question", questionRoutes)
 
 mongoose.connect(
     process.env.DB_CONNECTION, () =>{

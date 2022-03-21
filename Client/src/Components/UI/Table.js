@@ -1,23 +1,41 @@
 import React, {useEffect, useState} from 'react'
-import questionData from '../../questionData'
 import './Table.css'
 import axios from 'axios';
 import { toast } from 'react-toastify'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 
 function Table() {
 
-    const [patientsData, setPatientsData] = useState([])
+    const [patientsData, setPatientsData] = useState([]);
+    const [questionData, setQuestionData] = useState([]);
 
-    useEffect(()=>{
-        getPatients()
+    const navigate = useNavigate();
+
+    useEffect(async ()=>{
+        setPatientsData(await getPatients())
+        setQuestionData(await getQuestionData())
+        console.log(questionData)
     }, [])
+
+    console.log("Patients data below")
+    console.log(patientsData);
+
+    //Server requests
+    const getQuestionData = async ()=>{
+    console.log("in getQuestionData async func");
+    const response = await axios.get("http://localhost:5000/question/getQuestionData")
+    if(response.status === 200){
+        console.log(response.data)
+        return response.data
+    }
+}
 
     const getPatients = async ()=>{
         const response = await axios.get("http://localhost:5000/patients/getPatients");
         if(response.status === 200){
-            setPatientsData(response.data)
+            return response.data
         }
         else{
             response.send("Unable to get patients data");
@@ -39,8 +57,18 @@ function Table() {
         }
     }
 
+
+    console.log("from Table");
+    console.log(questionData);
+
+
   return (
-    <div style={{marginTop: "80px"}}>
+    <>
+    <div className="add-patient-link-container">
+            <button onClick={()=>{navigate('/add')}}>Add patient</button>
+    </div>
+
+    <div style={{marginTop: "15px"}}>
         <table className='styled-table'>
             <thead>
             <tr>
@@ -54,15 +82,17 @@ function Table() {
         
             <tbody>
                     {patientsData && patientsData.map((record, index)=>{
+                        console.log(record)
                         return (
                             <tr key={index}>
                             <th scope="row">{ index+1 }</th>
-                            <td>{record.name}</td>
-                            <td>{record.gender}</td>
-                            <td>{record.age}</td>
-                            <td>{record.language}</td>
-                            <td>{record.procedure}</td>
-                            <td style={{display:"flex"}}>
+                            {Object.entries(record).map(([column, value], index)=>{
+                                if(column !== "_id" && column !== "__v")
+                                {
+                                    return <td key={index} table-data={column}>{value}</td>
+                                }
+                            })}
+                            <td table-data={"Actions"} style={{display:"flex",justifyContent:"flex-end"}}>
                                 <Link to={`/update/${record._id}`}>
                                     <button className='btn btn-edit'>Edit</button>
                                 </Link>
@@ -74,6 +104,7 @@ function Table() {
             </tbody>
         </table>
     </div>
+    </>
   )
 }
 

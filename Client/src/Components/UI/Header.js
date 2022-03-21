@@ -4,6 +4,12 @@ import './Header.css'
 
 function Header() {
     const [activeTab, setActiveTab] = useState("Home")
+    const [toggleMenu, setToggleMenu] = useState(false);
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+    const changeMenuState = () =>{
+        setToggleMenu(!toggleMenu);
+    }
 
     const location = useLocation();
     useEffect(()=>{
@@ -18,16 +24,17 @@ function Header() {
   return (
     <div className="header">
         <p className="logo">Patient Management System</p>
-        <div className="header-right">
+        <button className="menu-btn" onClick={changeMenuState}>Menu</button>
+        {(toggleMenu || screenWidth > "768px") && (<div className="header-right">
             <Link to="/">
                 <p className={`${activeTab === "Home" ? "active" : ""}`}
                  onClick={()=>{setActiveTab("Home")}}>Home</p>
             </Link>
-            <Link to="/add">
+            <Link id="AddPatient" to="/add">
                 <p className={`${activeTab === "AddPatient" ? "active" : ""}`}
                  onClick={()=>{setActiveTab("AddPatient")}}>Add Patient</p>
             </Link>
-        </div>
+        </div>)}
     </div>
   )
 }

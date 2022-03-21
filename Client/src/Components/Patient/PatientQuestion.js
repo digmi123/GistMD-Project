@@ -1,20 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import {useState} from 'react'
+import './PatientQuestion.css'
 
 
 function PatientQuestion(props) {
+  
 
-  // const handleInputChange = ()=>{
-  //   props.inputChange();
-  // }
+  const [value, setValue] = useState("")
+  //console.log(props.filledValues)
+
+  useEffect(()=>{
+    setValue(props.filledValues)
+  }, [props.filledValues])
+
+  //console.log(props.question)
+
+  console.log(`value : ${value} id : ${props.question.id} type : ${props.question.type}`);
 
   switch(props.question.type) {
   case "text":
   case "number":
-    return <input type = {props.question.type} name={props.question.id} onChange={props.inputChange} key= {props.question.id} placeholder={props.question.text}/>
+    return <input className="input-container" type = {props.question.type} value={value} onChange={(e)=>{(setValue(e.target.value))}} name={props.question.id} key= {props.question.id} placeholder={props.question.text}/>
 
   case "select":
     return (
-          <select name={props.question.id} defaultValue={props.question.options[0]}>
+          <select className= "select-container" name={props.question.id} value={value} onChange={(e)=>{(setValue(e.target.value))}}>
             {props.question.options.map((option,i) => (
               <option key={i}>{option}</option>
             ))}

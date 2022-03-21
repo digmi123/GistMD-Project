@@ -7,7 +7,7 @@ router.get("/getPatients", PatientController.getPatients);
 router.get("/getPatient/:id", PatientController.getPatientById);
 router.post("/addPatient", PatientController.postPatient);
 router.delete("/deletePatient/:id", PatientController.deletePatientById);
-//router.put("/updatePatient/:id", PatientController.updatePatientById);
+router.put("/updatePatient/:id", PatientController.updatePatientById)
 
 
 module.exports = router;
