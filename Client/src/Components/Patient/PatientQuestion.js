@@ -7,20 +7,16 @@ function PatientQuestion(props) {
   
 
   const [value, setValue] = useState("")
-  //console.log(props.filledValues)
 
   useEffect(()=>{
     setValue(props.filledValues)
   }, [props.filledValues])
 
-  //console.log(props.question)
-
-  console.log(`value : ${value} id : ${props.question.id} type : ${props.question.type}`);
 
   switch(props.question.type) {
   case "text":
   case "number":
-    return <input className="input-container" type = {props.question.type} value={value} onChange={(e)=>{(setValue(e.target.value))}} name={props.question.id} key= {props.question.id} placeholder={props.question.text}/>
+    return <input className="input-container" type = {props.question.type} value={value} onChange={(e)=>{(setValue(e.target.value))}} name={props.question.id} key= {props.question.id} placeholder={props.question.id}/>
 
   case "select":
     return (

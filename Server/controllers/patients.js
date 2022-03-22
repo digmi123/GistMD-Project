@@ -32,9 +32,11 @@ module.exports.postPatient = async (req,res)=>{
     const patient = new Patient(req.body)
 
     try{
+        console.log(req.body)
         const savedPatient = await patient.save();
         return res.send("Patient added successfully");
     }catch(err) {
+        console.log(err)
         return res.status(400).send("Unable to create patient")
     }
 }

@@ -16,18 +16,13 @@ function Table() {
     useEffect(async ()=>{
         setPatientsData(await getPatients())
         setQuestionData(await getQuestionData())
-        console.log(questionData)
     }, [])
 
-    console.log("Patients data below")
-    console.log(patientsData);
 
     //Server requests
     const getQuestionData = async ()=>{
-    console.log("in getQuestionData async func");
     const response = await axios.get("http://localhost:5000/question/getQuestionData")
     if(response.status === 200){
-        console.log(response.data)
         return response.data
     }
 }
@@ -58,10 +53,6 @@ function Table() {
     }
 
 
-    console.log("from Table");
-    console.log(questionData);
-
-
   return (
     <>
     <div className="add-patient-link-container">
@@ -82,16 +73,23 @@ function Table() {
         
             <tbody>
                     {patientsData && patientsData.map((record, index)=>{
-                        console.log(record)
+                        //console.log(record)
                         return (
                             <tr key={index}>
                             <th scope="row">{ index+1 }</th>
-                            {Object.entries(record).map(([column, value], index)=>{
+                            {questionData.map((question,index) => {
+                                console.log(question);
+                                if(record[question.id]){
+                                    return <td key={index} table-data={question.text}>{record[question.id]}</td>
+                                }
+                                return <td key={index} table-data={question.text}>{"Null"}</td>
+                            })}
+                            {/* {Object.entries(record).map(([column, value], index)=>{
                                 if(column !== "_id" && column !== "__v")
                                 {
                                     return <td key={index} table-data={column}>{value}</td>
                                 }
-                            })}
+                            })} */}
                             <td table-data={"Actions"} style={{display:"flex",justifyContent:"flex-end"}}>
                                 <Link to={`/update/${record._id}`}>
                                     <button className='btn btn-edit'>Edit</button>
