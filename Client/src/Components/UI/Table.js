@@ -55,8 +55,8 @@ function Table() {
 
   return (
     <>
-    <div className="add-patient-link-container">
-            <button onClick={()=>{navigate('/add')}}>Add patient</button>
+    <div className="add-patient-btn-container">
+            <button className="btn btn-add-patient"onClick={()=>{navigate('/add')}}>Add patient</button>
     </div>
 
     <div style={{marginTop: "15px"}}>
@@ -73,7 +73,6 @@ function Table() {
         
             <tbody>
                     {patientsData && patientsData.map((record, index)=>{
-                        //console.log(record)
                         return (
                             <tr key={index}>
                             <th scope="row">{ index+1 }</th>
@@ -84,12 +83,6 @@ function Table() {
                                 }
                                 return <td key={index} table-data={question.text}>{"Null"}</td>
                             })}
-                            {/* {Object.entries(record).map(([column, value], index)=>{
-                                if(column !== "_id" && column !== "__v")
-                                {
-                                    return <td key={index} table-data={column}>{value}</td>
-                                }
-                            })} */}
                             <td table-data={"Actions"} style={{display:"flex",justifyContent:"flex-end"}}>
                                 <Link to={`/update/${record._id}`}>
                                     <button className='btn btn-edit'>Edit</button>

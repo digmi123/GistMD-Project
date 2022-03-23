@@ -26,14 +26,14 @@ const questionData =
         text: "Procedure name",
         required: true
     },
-     mikolo:{
+    weight:{
         type: "text",
-        text: "kakiPopen",
+        text: "Patient weight",
         required: true
     },
-    kaki:{
+        height:{
         type: "text",
-        text: "kakiPopen",
+        text: "Patient height",
         required: true
     },
 }
