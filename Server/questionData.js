@@ -28,7 +28,7 @@ const questionData =
     },
     // weight:{
     //     type: "text",
-    //     text: "Patient weight",
+    //     text: "Patient weight (kg)",
     //     required: true
     // },
     //     height:{

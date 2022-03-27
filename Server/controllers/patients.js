@@ -22,13 +22,7 @@ module.exports.getPatientById = async (req,res)=>{
 
 
 module.exports.postPatient = async (req,res)=>{
-    // const patient = new Patient({
-    // name:req.body.name,
-    // gender:req.body.gender,
-    // age:req.body.age,
-    // language:req.body.language,
-    // procedure:req.body.procedure
-    // });
+
     const patient = new Patient(req.body)
 
     try{

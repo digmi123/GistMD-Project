@@ -8,11 +8,15 @@ import { Link, useNavigate } from 'react-router-dom';
 
 function Table() {
 
+    //Setting all the patients data from the db in order to place them in the UI table.
+    //Setting the questionsData from the backhand as a list with the new value id which contains the id of the field,
+    //for example gender, procedure etc. 
     const [patientsData, setPatientsData] = useState([]);
     const [questionData, setQuestionData] = useState([]);
 
     const navigate = useNavigate();
 
+    //Setting the data everytime the table is rendering.
     useEffect(async ()=>{
         setPatientsData(await getPatients())
         setQuestionData(await getQuestionData())
@@ -38,7 +42,6 @@ function Table() {
     }
 
     const deletePatientById = async (patientId)=>{
-        console.log(patientId);
         const response = await axios.delete(`http://localhost:5000/patients/deletePatient/${patientId}`)
         if(response.status === 200){
             toast.success(response.data)
@@ -55,6 +58,7 @@ function Table() {
 
   return (
     <>
+    {/* The add button that will navigate us into the addOrEdit component. */}
     <div className="add-patient-btn-container">
             <button className="btn btn-add-patient"onClick={()=>{navigate('/add')}}>Add patient</button>
     </div>
@@ -77,7 +81,6 @@ function Table() {
                             <tr key={index}>
                             <th scope="row">{ index+1 }</th>
                             {questionData.map((question,index) => {
-                                console.log(question);
                                 if(record[question.id]){
                                     return <td key={index} table-data={question.text}>{record[question.id]}</td>
                                 }

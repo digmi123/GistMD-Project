@@ -13,11 +13,10 @@ function App() {
       <Header/>
       <ToastContainer position="top-center"/>
         <Routes>
-        <Route exact path="/" element={<HomePage/>}/>
-        <Route path="/add" element={<AddOrEditPatient/>}/>
-        <Route path="/update/:id" element={<AddOrEditPatient/>}/>
+          <Route exact path="/" element={<HomePage/>}/>
+          <Route path="/add" element={<AddOrEditPatient/>}/>
+          <Route path="/update/:id" element={<AddOrEditPatient/>}/>
         </Routes>
-     
     </div>
     </BrowserRouter>
   );
