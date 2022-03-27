@@ -26,16 +26,16 @@ const questionData =
         text: "Procedure name",
         required: true
     },
-    weight:{
-        type: "text",
-        text: "Patient weight",
-        required: true
-    },
-        height:{
-        type: "text",
-        text: "Patient height",
-        required: true
-    },
+    // weight:{
+    //     type: "text",
+    //     text: "Patient weight",
+    //     required: true
+    // },
+    //     height:{
+    //     type: "text",
+    //     text: "Patient height",
+    //     required: true
+    // },
 }
 
 module.exports = questionData

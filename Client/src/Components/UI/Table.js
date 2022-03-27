@@ -81,7 +81,7 @@ function Table() {
                                 if(record[question.id]){
                                     return <td key={index} table-data={question.text}>{record[question.id]}</td>
                                 }
-                                return <td key={index} table-data={question.text}>{"Null"}</td>
+                                return <td key={index} table-data={question.text}>{"N/A"}</td>
                             })}
                             <td table-data={"Actions"} style={{display:"flex",justifyContent:"flex-end"}}>
                                 <Link to={`/update/${record._id}`}>
