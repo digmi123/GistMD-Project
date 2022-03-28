@@ -87,9 +87,7 @@ function Table() {
                                 return <td key={index} table-data={question.text}>{"N/A"}</td>
                             })}
                             <td table-data={"Actions"} style={{display:"flex",justifyContent:"flex-end"}}>
-                                <Link to={`/update/${record._id}`}>
-                                    <button className='btn btn-edit'>Edit</button>
-                                </Link>
+                                <button className='btn btn-edit' onClick={()=>{navigate(`/update/${record._id}`)}}>Edit</button>
                                 <button className='btn btn-delete' onClick={()=> deletePatientById(record._id)}>Delete</button>
                             </td>
                             </tr>
